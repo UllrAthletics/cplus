@@ -3,13 +3,13 @@ Author: Hunter Morrison
 Purpose: class for handling test questions 
 Date: 2/25/2019
 */
-#include <iostream>
+
 #include <string>
 #include <fstream>
 using namespace std;
 
 // files reaading
-ifstream myfile;
+extern ifstream myfile;
 
 // parent/super class
 class  Question 
