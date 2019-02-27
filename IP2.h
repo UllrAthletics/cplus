@@ -52,19 +52,19 @@ public:
 	{
 		string questionAnswer;
 		question = theQuestion;
-		points = pointValue;
+		points = pointValue
 		options = "TRUE / FALSE";
 		
 		// read in answer from the text file
-		getline(myfile,questionAnswer);
-		answer = questionAnswer;
+		getline(myfile,theanswer);
+		answer = theAnswer;
 	}
 	
 	// print question and answer
 	void printOptions()
 	{
-		cout << "TF: " << question << endl;
-		cout << "Answer: " << answer << endl;
+		cout << question << endl;
+		cout << answer << endl;
 	}
 	
 	string getAnswer()
@@ -102,13 +102,13 @@ public:
 		
 		// get answer and set as answer variable
 		getline(myfile,line);
-		answer = line;
+		answer = line
 	}
 	
 	void printOptions()
 	{
 		char first = 'A';
-		cout << "MC: " << question << endl;
+		cout << question << endl;
 		for(int count = 0; count < numberOfOptions; count++)
 		{
 			cout << first++ << ". " << options[count] << endl;
