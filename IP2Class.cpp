@@ -3,13 +3,13 @@ Author: Hunter Morrison
 Purpose: class for handling test questions 
 Date: 2/25/2019
 */
-#include <iostream>
+
 #include <string>
 #include <fstream>
 using namespace std;
 
 // files reaading
-ifstream infile;
+extern ifstream myfile;
 
 // parent/super class
 class  Question 
@@ -56,7 +56,7 @@ public:
 		options = "TRUE / FALSE";
 		
 		// read in answer from the text file
-		getline(infile,theanswer);
+		getline(myfile,theanswer);
 		answer = theAnswer;
 	}
 	
@@ -88,7 +88,7 @@ public:
 		string line;
 		
 		// read in # of choices from file
-		getline(infile,line);
+		getline(myfile,line);
 		numberOfOptions = stoi(line);
 		question = theQuestion;
 		value = pointValue;
@@ -96,12 +96,12 @@ public:
 		// get each choice line and put into the array of options
 		for(int count = 0; count < numberOfOptions; count++)
 		{
-			getline(infile,line);
+			getline(myfile,line);
 			options[count] = line;
 		}
 		
 		// get answer and set as answer variable
-		getline(infile,line);
+		getline(myfile,line);
 		answer = line
 	}
 	

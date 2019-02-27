@@ -1,17 +1,72 @@
-3
-TF 5
-There exists birds that cannot fly?
-true
+10
+MC 8
+Entomology is the science that studies:
+4
+Behavior of human beings
+Insects
+The origin and history of technical and scientific terms
+The formation of rocks
+B
 MC 10
-Who was the President of the USA in 1991?
+Eritrea, which became the 182nd member of the UN in 1993, is in the continent of:
+5
+Asia
+Europe
+Antarctica
+Africa
+Australia
+D
+MC 10
+For which of the following disciplines is Nobel Prize awarded?
+4
+Physics and Chemistry
+Physiology or Medicine
+Literature, Peace and Economics
+All of the above
+D
+TF 5
+The first human heart transplant operation was conducted by Dr. Christiaan Barnard, on Louis Washkansky, in 1967.
+TRUE
+MC 15
+Gravity setting chambers are used to remove:
 6
-Richard Nixon
-Gerald Ford
-Jimmy Carter
-Ronald Reagan
-George Bush Sr.
-Bill Clinton
+SOx
+NOx
+suspended particulate matter
+CO
+H2O
+NaCl
+C
+TF 5
+The first Afghan War took place in 1848.
+FALSE : 1839
+MC 15
+For the Olympics and World Tournaments, the dimensions of a basketball court are:
+5
+26 m x 16 m
+26 m x 14 m
+30 m x 17 m
+28 m x 15 m
+27 m x 16 m
+28 m x 16 m
+D
+TF 8
+During World War II, Germany attacked france on May 10, 1940.
+TRUE
+MC 12
+Frederick Sanger is a two time recipient of the Nobel Prize in which category/categories?
+4
+Chemistry in 1958 and 1980
+Physics in 1956 and 1972
+Chemistry in 1954 and Peace in 1962
+Physics in 1903 and Chemistry in 1911
+A
+MC 12
+Rick Astley is never going to:
+5
+Give you up
+Let you down
+Run around
+Desert you
+All of the above
 E
-TF 10
-The city of Boston hosted the 2004 Summer Olympics?
-false
