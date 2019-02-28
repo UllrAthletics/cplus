@@ -8,7 +8,7 @@ Description: Write a C++ program to read in various types of test
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "IP2.h"
+#include "IP2Class.cpp"
 using namespace std;
 
 // file reading
@@ -70,6 +70,7 @@ int main()
 	
 	for(int count = 0; count < numQuestions; count++)
 	{
+		cout << "Question " << count+1 << ": " << endl;
 		myQuestions[count] -> printOptions();
 		cout << endl;
 	}

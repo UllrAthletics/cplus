@@ -50,13 +50,13 @@ class QuestionTF: public Question
 public:
 	void setQuestion(string theQuestion, int pointValue)
 	{
-		string questionAnswer;
+		string theAnswer;
 		question = theQuestion;
-		points = pointValue
+		points = pointValue;
 		options = "TRUE / FALSE";
 		
 		// read in answer from the text file
-		getline(myfile,theanswer);
+		getline(myfile,theAnswer);
 		answer = theAnswer;
 	}
 	
@@ -102,7 +102,7 @@ public:
 		
 		// get answer and set as answer variable
 		getline(myfile,line);
-		answer = line
+		answer = line;
 	}
 	
 	void printOptions()
