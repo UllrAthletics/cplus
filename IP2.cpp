@@ -3,7 +3,9 @@ Author: Hunter Morrison
 Title: Individual project 2
 Description: Write a C++ program to read in various types of test 
 	questions (multiple choice and True/False) from a test bank 
-	(text file), and load the questions into an array of questions. */
+	(text file), and load the questions into an array of questions.
+Date modified: 2/27/2019	
+ */
 	
 #include <iostream>
 #include <string>
