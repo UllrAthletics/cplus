@@ -60,6 +60,9 @@ int main()
 				myQuestions[count] -> setQuestion(theQuestion,questionValue);
 			}
 		}
+	}else{
+		cout << "File not found." << endl;
+		terminate();
 	}
 	
 	// print questions / answers and test length

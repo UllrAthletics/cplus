@@ -42,7 +42,7 @@ The first Afghan War took place in 1848.
 FALSE : 1839
 MC 15
 For the Olympics and World Tournaments, the dimensions of a basketball court are:
-5
+6
 26 m x 16 m
 26 m x 14 m
 30 m x 17 m

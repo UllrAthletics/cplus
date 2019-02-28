@@ -3,7 +3,7 @@ Author: Hunter Morrison
 Purpose: class for handling test questions 
 Date: 2/25/2019
 */
-
+#include <iostream>
 #include <string>
 #include <fstream>
 using namespace std;
@@ -50,13 +50,13 @@ class QuestionTF: public Question
 public:
 	void setQuestion(string theQuestion, int pointValue)
 	{
-		string questionAnswer;
+		string theAnswer;
 		question = theQuestion;
-		points = pointValue
+		points = pointValue;
 		options = "TRUE / FALSE";
 		
 		// read in answer from the text file
-		getline(myfile,theanswer);
+		getline(myfile,theAnswer);
 		answer = theAnswer;
 	}
 	
@@ -102,7 +102,7 @@ public:
 		
 		// get answer and set as answer variable
 		getline(myfile,line);
-		answer = line
+		answer = line;
 	}
 	
 	void printOptions()
@@ -124,5 +124,5 @@ public:
 private:
 	int value, numberOfOptions;
 	string question, answer;
-	string options[6];
+	string options[10];
 };
