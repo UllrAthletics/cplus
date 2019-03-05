@@ -1,0 +1,207 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 //============================================================================\
+// Name        : Week2Demo.cpp\
+// Author      : Dr. Evans\
+// Version     :\
+// Copyright   : all rights and privileges thereof\
+// Description : Hello World in C++, Ansi-style\
+//============================================================================\
+\
+#include <iostream>\
+#include <string>\
+#include <fstream>\
+\
+using namespace std;\
+\
+//the files we will use\
+ofstream outfile;\
+ifstream infile;\
+\
+class Question // super class\
+\{\
+public:\
+\
+	string getQuestion()//gets the question\
+	\{\
+		return question;\
+	\}\
+	int getValue() //gets the point value of the question\
+	\{\
+		return value;\
+	\}\
+\
+	virtual void setQuestion(string answer, int value)\
+	\{\
+	\}\
+	virtual void printOptions()\
+	\{\
+	\}\
+\
+	virtual string getAnswer()\
+	\{\
+		return answer;\
+	\}\
+\
+private:\
+	string question, answer;\
+	int value;\
+\};\
+\
+class QuestionTF: public Question// class for true and false questions\
+\{\
+public:\
+	void setQuestion(string theQuestion, int pointValue)\
+	\{\
+		string theAnswer;\
+		question = theQuestion;\
+		points = pointValue;\
+		options = "true/false";\
+		//get the answer from the file\
+		getline(infile,theAnswer);\
+		answer = theAnswer;\
+	\}\
+	void printOptions()//prints the options for that question\
+	\{\
+		cout<<question<<endl;\
+		cout<<answer<<endl;\
+	\}\
+	string getAnswer()//outputs the answer for that question\
+	\{\
+		return answer;\
+	\}\
+private:\
+	string question;\
+	string answer;\
+	int points;\
+	string options;\
+\};\
+\
+class QuestionMC: public Question//class for multiple choice\
+\{\
+public:\
+	void setQuestion(string theQuestion, int pointValue)\
+	\{\
+		string line;\
+		//get the number of choices from the file\
+		getline(infile,line);//\
+		numberOfOptions = stoi(line);\
+		question = theQuestion;\
+		value = pointValue;\
+		//get the individual choice lines and load to options array\
+		for (int count = 0; count<numberOfOptions;count++)\{\
+			getline(infile,line);\
+			options[count] = line;\
+		\}\
+		//get the answer from the file and load into answer\
+		getline(infile, line);\
+		answer = line;\
+	\}\
+	void printOptions()// prints the questions, options, and answer\
+	\{\
+		char first = 'A';\
+		cout<<question<<endl;\
+		for(int count = 0; count<numberOfOptions;count++)\{\
+			cout<<first++ <<".  "<<options[count]<<endl;\
+		\}\
+		cout<<"Answer:  "<< answer << endl;\
+	\}\
+	string getAnswer()// prints the answer\
+	\{\
+		return answer;\
+	\}\
+private:\
+	int value, numberOfOptions;\
+	string question, answer;\
+	string options[6];\
+\};\
+\
+\
+\
+int main() \{\
+	Question *myQuestions[10];\
+	string questiontype, questiontxt;\
+	string answertxt, optiontxt;\
+	int numquestions, questionvalue;\
+\
+// this is something to write the test bank test file from the text given Week 2\
+// You might use a text file that you create separately and avoid this\
+// in Week 3 the focus is developing a test file section that can replace this.\
+outfile.open("testbank.txt");\
+if (outfile.is_open())\
+\{\
+	outfile << "3\\n";\
+	outfile << "TF 5\\n";\
+	outfile << "There exists birds that cannot fly?\\n";\
+	outfile << "true\\n";\
+	outfile << "MC 10\\n";\
+	outfile << "Who was the President of the USA in 1991?\\n";\
+	outfile << "6\\n";\
+	outfile << "Richard Nixon\\n";\
+	outfile << "Gerald Ford\\n";\
+	outfile << "Jimmy Carter\\n";\
+	outfile << "Ronald Reagan\\n";\
+	outfile << "George Bush Sr.\\n";\
+	outfile << "Bill Clinton\\n";\
+	outfile << "E\\n";\
+	outfile << "TF 10\\n";\
+	outfile << "The city of Boston hosted the 2004 Summer Olympics?\\n";\
+	outfile << "false\\n";\
+	outfile.close();\
+\}\
+else cout << "Unable to open file";\
+\
+//opening the testbank file and processing as a question of each type\
+\
+infile.open("testbank.txt");\
+string line, theQuestion, theAnswer;\
+if (infile.is_open())\
+\{\
+	//get the number of questions from the first line in the file\
+	getline(infile,line);\
+	numquestions = stoi(line);\
+	for(int count = 0; count<numquestions;count++)\{\
+		getline(infile,line);\
+		//get the next line with the question type and the value of the question\
+		int npos = line.size();\
+		int prev_pos = 0;\
+		int pos = 0;\
+		while( line[pos]!=' ')\
+			pos++;\
+		questiontype = line.substr(prev_pos, pos-prev_pos);\
+		prev_pos = ++pos;\
+        questionvalue = stoi(line.substr(prev_pos, npos-prev_pos)); // Last word\
+\
+	   //process a true/false question\
+		if (questiontype == "TF")\
+		\{\
+			myQuestions[count] = new QuestionTF;\
+			getline(infile,theQuestion);\
+			myQuestions[count]->setQuestion(theQuestion,questionvalue);\
+		\}\
+		//process a multiple choice question\
+		if (questiontype =="MC")\
+		\{\
+			myQuestions[count] =new QuestionMC;\
+			getline(infile,theQuestion);\
+			myQuestions[count]->setQuestion(theQuestion,questionvalue);\
+		\}\
+\
+	\}\
+\}\
+	//print out the questions that have been processed\
+	for(int count = 0; count<numquestions;count++)\
+	\{\
+		myQuestions[count]->printOptions();\
+		cout<<endl;\
+	\}\
+\
+	getchar();\
+	return 0;\
+\}\
+\
+}
