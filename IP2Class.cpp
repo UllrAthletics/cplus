@@ -9,7 +9,7 @@ Date: 2/25/2019
 using namespace std;
 
 // files reaading
-extern ifstream myfile;
+extern ifstream examfile;
 
 // parent/super class
 class  Question 
@@ -56,13 +56,14 @@ public:
 		options = "TRUE / FALSE";
 		
 		// read in answer from the text file
-		getline(myfile,theAnswer);
+		getline(examfile,theAnswer);
 		answer = theAnswer;
 	}
 	
 	// print question and answer
 	void printOptions()
 	{
+		cout << "Points: " << points << endl;
 		cout << question << endl;
 		cout << answer << endl;
 	}
@@ -88,7 +89,7 @@ public:
 		string line;
 		
 		// read in # of choices from file
-		getline(myfile,line);
+		getline(examfile,line);
 		numberOfOptions = stoi(line);
 		question = theQuestion;
 		value = pointValue;
@@ -96,18 +97,19 @@ public:
 		// get each choice line and put into the array of options
 		for(int count = 0; count < numberOfOptions; count++)
 		{
-			getline(myfile,line);
+			getline(examfile,line);
 			options[count] = line;
 		}
 		
 		// get answer and set as answer variable
-		getline(myfile,line);
+		getline(examfile,line);
 		answer = line;
 	}
 	
 	void printOptions()
 	{
 		char first = 'A';
+		cout << "Points: " << value << endl;
 		cout << question << endl;
 		for(int count = 0; count < numberOfOptions; count++)
 		{
