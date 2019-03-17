@@ -11,5 +11,3 @@ E
 TF 5
 Programming can become very complex, very quickly.
 TRUE
-e.
-TRUE

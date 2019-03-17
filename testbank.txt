@@ -39,7 +39,7 @@ NaCl
 C
 TF 5
 The first Afghan War took place in 1848.
-FALSE : 1839
+FALSE
 MC 15
 For the Olympics and World Tournaments, the dimensions of a basketball court are:
 6

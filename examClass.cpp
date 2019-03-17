@@ -8,6 +8,8 @@ Inlcudess:
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <iomanip>
+#include <utility>
 using namespace std;
 
 
@@ -37,7 +39,7 @@ public:
 		{
 		}
 		
-		virtual void printOptions()
+		virtual int printOptions()
 		{
 		}
 		
@@ -80,11 +82,32 @@ public:
 	}
 	
 	// print question and answer
-	void printOptions()
+	int printOptions()
 	{
+		int points = 0;
+		
 		cout << "Points: " << value << endl;
 		cout << question << endl;
-		cout << answer << endl;
+		cout << "Enter T or F to answer the question: ";
+		cin >> choice;
+		cin.get();
+		
+		for (int x = 0; x < choice.length(); x++)
+		{
+			choice[x] = toupper(choice[x]);
+		}
+		
+		if ((choice.at(0) == 'T' || choice.at(0) == 't') && answer == "TRUE")
+		{
+			cout << "\nCORRECT. The answer is: " << answer << endl;
+			points = value;
+		}else if ((choice.at(0) == 'F' || choice.at(0) == 'f') && answer == "FALSE"){
+			cout << "\nCORRECT. The answer is: " << answer << endl;
+			points = value;
+		}else{
+			cout << "\n" << choice << " is INCORRECT. The correct answer is: " << answer << endl;
+		}
+		return points;
 	}
 	
 	string getAnswer()
@@ -96,6 +119,7 @@ private:
 	string question, questiontype;
 	string answer;
 	int value;
+	string choice;
 	string options;
 };
 
@@ -136,16 +160,34 @@ public:
 		return questiontype;
 	}
 	
-	void printOptions()
+	int printOptions()
 	{
+		int points = 0;
 		char first = 'A';
+		
 		cout << "Points: " << value << endl;
 		cout << question << endl;
 		for(int count = 0; count < numberOfOptions; count++)
 		{
 			cout << first++ << ". " << options[count] << endl;
 		}
-		cout << "Answer: " << answer << endl;
+		cout << "Enter a letter option from the list above: ";
+		cin >> choice;
+		cin.get();
+		
+		for (int x = 0; x < choice.length(); x++)
+		{
+			choice[x] = toupper(choice[x]);
+		}
+		
+		if (choice == answer)
+		{
+			cout << "\nCORRECT. The answer is: " << answer << endl;
+			points = value;
+		}else{
+			cout << "\n" << choice << " is INCORRECT. The correct answer is: " << answer << endl;
+		}
+		return points;
 	}
 	
 	string getAnswer()
@@ -157,6 +199,7 @@ private:
 	int value, numberOfOptions;
 	string question, answer;
 	string options[10], questiontype;
+	string choice;
 };
 
 
@@ -213,9 +256,11 @@ public:
 		return numQuestions;
 	}
 	
-	void printExam(int numQuestions)
+	int takeExam(int numQuestions)
 	{
 		string qType;
+		int score = 0, maxScore = 0, points = 0;
+		
 		// print questions / answers and test length
 		cout << "Test length: " << numQuestions << " questions\n" << endl;
 	
@@ -223,14 +268,62 @@ public:
 		{
 			qType = myQuestions[count] -> questionType();
 			cout << "Question " << count+1 << ": " << endl;
-			cout << qType << " " << myQuestions[count] -> getValue() << endl;
-			myQuestions[count] -> printOptions();
+			value = myQuestions[count] -> getValue();
+			cout << qType << " " << value << endl;
+			maxScore += value;
+			points = myQuestions[count] -> printOptions();
 			cout << endl;
+			score += points;
+		}
+		pointsEarned = score;
+		totalPoints = maxScore;
+	}
+	
+	void printResults(int numQuestions)
+	{
+		char letterGrade;
+		double grade = 0;
+		
+		// Set floating point values to two decimal places
+		cout << setiosflags(ios::fixed);
+		cout << setiosflags(ios::showpoint);
+		cout << setprecision(2);
+		
+		cout << "Points: " << pointsEarned << " out of " << totalPoints << endl;
+		grade = ((static_cast<double>(pointsEarned) / static_cast<double>(totalPoints)) * 100);
+		cout << "Grade Percentage: " << grade << "%" << endl;
+		 
+		if (grade >= 90)
+		{
+			letterGrade = 'A';
+		}else if (grade < 90 && grade >= 80){
+			letterGrade = 'B';
+		}else if (grade < 80 && grade >= 70){
+			letterGrade = 'C';
+		}else if (grade < 70 && grade >= 60){
+			letterGrade = 'D';
+		}else{
+			letterGrade = 'F';
+		}
+		
+		switch(letterGrade)
+		{
+			case 'A': cout << "Well done! You passed with an A\n" << endl;
+				break;
+			case 'B': cout << "Good Job! You passed with a B\n" << endl;
+				break;
+			case 'C': cout << "You can do better. You passed with a C\n" << endl;
+				break;
+			case 'D': cout << "You barely made it. You passed with a D\n" << endl;
+				break;
+			default: cout << "You failed. You earned an F\n" << endl;
+				break;
 		}
 	}
 	
 	private:
 		Question *myQuestions[100];
-		int numQuestions;
+		int numQuestions, value, totalPoints, pointsEarned;
+		string qType;
 };
 
